@@ -30,13 +30,9 @@ async function run() {
 
     app.get("/products/:brand", async (req, res) => {
       const brand = req.params.brand;
-      // console.log(brand)
       const query = { brand: brand };
-      // const options = {}
-      // console.log(query)
       const cursor = productCollection.find(query);
       const result = await cursor.toArray();
-      // console.log(result)
       res.send(result);
     });
 
@@ -69,7 +65,6 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await productCollection.findOne(query);
-      //   console.log(result);
       res.send(result);
     });
 
@@ -95,7 +90,6 @@ async function run() {
       const _id = req.params.idd;
       const query = { _id: new ObjectId(_id) };
       const result = await cartCollection.findOne(query);
-      console.log(result);
       res.send(result);
     });
 
