@@ -27,6 +27,21 @@ async function run() {
     await client.connect();
     const productCollection = client.db("productDB").collection("product");
     const cartCollection = client.db("cartDB").collection("cart");
+    const addCollection = client.db("advertisementDB").collection("advertises");
+
+    // app.post("/advertise" , async (req , res) => {
+    //   const advertise = req.body;
+    //   const result = await addCollection.insertOne(advertise);
+    //   res.send(result)
+    // })
+
+    app.get("/advertise/:name" , async (req , res) => {
+      const name = req.params.name;
+      const query = { name : name};
+      const cursor = addCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result)
+    })
 
     app.get("/products/:brand", async (req, res) => {
       const brand = req.params.brand;
